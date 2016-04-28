@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>dee20 Dice Roller!</title>		
+		<style>
+			div.dice{
+				float:left;
+				width:32px;
+				background:#FF0000;
+				color:#FFFFFF;
+				border: #999 4px solid;
+				padding:10px;
+				font-size:24px;
+				text-align:center;
+				margin:5px;
+			}
+			.indent-1 {float: left;}
+			.indent-1 section {width: 50%; float: left;}
+		</style>
+		<script>
+			function rollIt(){
+				var die = document.getElementById("die");				
+				
+				var d20 = Math.floor(Math.random() * 20) + 1;
+				
+				die.innerHTML = d20;				
+				
+				enemyRoll(d20);				
+			}
+			
+			function enemyRoll(playerRoll){
+				var die = document.getElementById("enemydie");				
+				
+				var d20 = Math.floor(Math.random() * 20) + 1;
+				
+				die.innerHTML = d20;				
+				
+				checkWin(d20, playerRoll);
+			}
+			
+			function checkWin(enemyRoll, playerRoll){
+				var winText = document.getElementById("outcome");
+				if (playerRoll == enemyRoll)
+				{
+					winText.innerHTML = "Draw!";
+					return;
+				}
+				if (playerRoll > enemyRoll)
+				{
+					winText.innerHTML = "You win!";
+				}
+				else
+				{
+					winText.innerHTML = "You lose!";
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<button onclick="rollIt()" style="clear:left;">Test your luck!</button>
+		<br />
+		<!-- Player and Opponent Dice Container -->
+		<section class="indent-1">
+			<section>
+				<header>
+					<h2>Player</h2>
+				</header>
+				<article>
+					<div id="die" class="dice">0</div>					
+				</article>
+			</section>						
+			<section>
+				<header>
+					<h2>Opponent</h2>
+				</header>
+				<article>
+					<div id="enemydie" class="dice">0</div>				
+				</article>
+			</section>
+		</section>
+		<!-- Result Text -->
+		<br />
+		<h2 id="outcome" style="clear:left;"></h2>
+	</body>
+</html>
